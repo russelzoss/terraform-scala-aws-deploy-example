@@ -1,0 +1,19 @@
+{
+    "builders":[{
+        "ami_name":"ubuntu-trusty-14.04-amd64-jvm-server-{{timestamp}}",
+        "source_ami":"ami-ec76ef9f",
+        "instance_type":"t2.micro",
+        "region":"eu-west-1",
+        "ssh_username":"ubuntu",
+        "type":"amazon-ebs"
+    }],
+    "provisioners":[{
+        "inline":[
+            "sudo add-apt-repository -y ppa:webupd8team/java",
+            "sudo apt-get update",
+            "sudo apt-get -y upgrade",
+            "echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections",
+            "sudo apt-get install -y oracle-java8-installer"
+            ],"type":"shell"
+        }]
+}
